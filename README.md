@@ -15,6 +15,9 @@ We are particulartly interested in CCS as they support lookup arguments which we
 
 ## Frontends
 
+### [noir](https://github.com/noir-lang/noir)
+Noir is a domain specific language for writing circuits. Noir is designed to be easy to use and understand. Noir supports Plonkish constraint systems out of the box. Noir does not support CCS out of the box.
+
 ### [Halo2](https://github.com/privacy-scaling-explorations/halo2)
 Halo2 has a lot of versatility. Halo2 itself has a frontend that is what the user interacts with to write circuits. Halo2 also has a backend where you can implement your own constraint system you want to use. Halo2 supports Plonkish constraint systems our of the box with lookup arguments. Halo2 doesn't support CCS out of the box. However, there does seem to be a path forward to support CCS with a custom halo2 backend. There be dragons.
 
@@ -43,4 +46,24 @@ Arecibo is a folding backend based on NOVA. It is referred to more generally as 
 Arecibo, does also have a step circuit trait which can be implemented to seemingly support arbitrary constraint systems. 
 
 ### [Sonobe](https://github.com/privacy-scaling-explorations/sonobe)
-Sonobe claims support for arkworks, circom and noname frontends. Sonobe supports Nova, CycleFold and HyperNova folding schemes.
+Sonobe claims support for arkworks, circom and noname frontends. Sonobe supports Nova, CycleFold and HyperNova folding schemes. Interestingly, Sonobe seems to have one of the only [CCS implementations](https://github.com/privacy-scaling-explorations/sonobe/blob/main/folding-schemes/src/arith/ccs.rs). Sonobe implements proto-galaxy. 
+
+
+### ProtoStar
+Proto Star is a folding scheme for Plonkish constraint systems supporting lookup arguments. There is support for it in the nior pipline. And option for us would be to use this r1cs to ACIR pipeline to generate an ACIR artifact for use in a plonkish IVC backend. 
+
+- [r1cs to ACIR](https://github.com/TomAFrench/circom-to-acir/blob/master/src/circuit.rs)
+- [ACIR](https://github.com/noir-lang/noir/blob/master/acvm-repo/acir/README.md)
+
+### [Nexus](https://github.com/nexus-xyz/nexus-zkvm)
+Nexus is a ZKVM that has an IVC backend. Nexus has one of the two implementations of [CCS](https://github.com/nexus-xyz/nexus-zkvm/blob/main/nova/src/ccs/mod.rs), the other of which is in sonobe.
+
+## Notes and Questions
+
+Protogalaxy / ProtoStar vs HyperNova (Plonkish folding vs ccs folding)
+
+ACIR (from noir) is a constraint system agnostic artifact.
+
+PLAF => plonkish artifact for halo2frontend.
+
+PIL => AIR artifact, part hermes.
